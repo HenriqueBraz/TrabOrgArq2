@@ -1,0 +1,56 @@
+start
+	ldi	r1,str
+	ldi	r2,sub_str
+comparator
+	ldb	r1,r1
+	ldb	r2,r2
+	sub	r3,r1,r2
+jumper_str
+	ldw	r4,index
+	add	r4,1
+	ldi	r1,str
+	add	r1,r4
+	stw	r4,index
+jumper_sub
+	bnz	r3,clr_subidx
+	ldw	r4,index_sub
+	add	r4,1
+	ldi	r2,sub_str
+	add	r2,r4
+	stw	r4,index_sub
+verify_subindex
+	ldw	r4,index_sub
+	ldw	r5,size_sub
+	sub	r3,r4,r5
+	bnz	r3,verify_index
+add_count
+	xor	r4,r4,r4
+	stw	r4,index_sub
+	ldw	r4,count
+	add	r4,1
+	stw	r4,count
+verify_index
+	ldw	r4,index
+	ldw	r5,size_str
+	sub	r3,r4,r5
+	bnz	r3,comparator
+end
+	ldi	r5,0xf002
+	ldw	r4,count
+	stw	r4,r5
+	hcf
+clr_subidx
+	ldi	r2,sub_str
+	ldb	r2,r2
+	xor	r4,r4,r4
+	stw	r4,index_sub
+	bnz	r7,verify_index
+
+str	"HELLO HELLO HELLO HELLO"
+sub_str	"HELLO"
+index	0
+index_sub	0
+size_str	23
+size_sub	5
+write	0xf002
+count	0

@@ -19,21 +19,23 @@ iFmaior
 	stw r4,maior	
 	add r2,1
 	add r4,r4,r2
+    add r4,r4,r2
 	bnz r7,rep
 
 iFmenor
 	stw r4,menor
 	add r2,1
 	add r4,r4,r2
+    add r4,r4,r2
 	bnz r7,rep
 		
 	
 
 end
 	ldi r1,0xf002
-        ldw r4,maior
+    ldw r4,maior
 	stw r4,r1
-        ldw r4,menor
+    ldw r4,menor
 	stw r4,r1
 	hcf 
 

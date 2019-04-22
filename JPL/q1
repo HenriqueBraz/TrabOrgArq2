@@ -1,0 +1,37 @@
+main
+	ldw r1,max
+	ldi r2,vetor
+	stw r2,maior
+	stw r2,menor
+	xor r2,r2,r2
+	ldi r4,vetor
+ifMaior
+	ldw r5,maior
+	ldw r2,r4
+	slt r3,r5,r2
+	bez r3,ifMenor
+	stw r2,maior
+ifMenor
+	ldw r5,menor
+	ldw r2,r4
+	slt r3,r2,r5
+	bez r3,rep
+	stw r2,menor
+rep	
+	bez r1,end
+	sub r1,1
+	add r4,1
+	add r4,1
+	bnz r7,ifMaior
+end
+	ldi r1,0xf002
+	ldw r4,maior
+	stw r4,r1
+	ldw r4,menor
+	stw r4,r1
+	hcf 
+
+max 30
+vetor 32 22 -45 198 50 26 17 18 90 32 2 17 9 100 99 0 64 76 47 54 57 61 23 78 66 37 34 56 86 92 
+menor 0
+maior 0
