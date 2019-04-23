@@ -1,0 +1,38 @@
+main
+	ldw r1,max ;carrega r1 com max
+	ldi r2,vetor ;carrega r2 com a primeira posicao do vetor
+	stw r2,maior ;armazena r2 em maior
+	stw r2,menor ;armazena r2 em menor
+	xor r2,r2,r2 ; zera r2
+	ldi r4,vetor ;carrega r4 com a primeira posicao de vetor
+ifMaior
+	ldw r5,maior ;carrega r5 com maior
+	ldw r2,r4 ;carrega r2 com o conteudo de r4
+	slt r3,r5,r2 ;pula bez enquanto r5 for maior que r2
+	bez r3,ifMenor ;goto ifMenor (in memorian Basic)
+	stw r2,maior ;armazena o conteudo de r2 em maior 
+ifMenor 
+	ldw r5,menor ;carrega menor em r5
+	ldw r2,r4 ;carrega r2 com o conteudo de r4
+	slt r3,r2,r5 ;pula bez enquanto r2 for maior que r5
+	bez r3,rep ;goto rep
+	stw r2,menor ;armazena o conteudo de r2 em menor 
+rep	
+	bez r1,end ;se r1 for zero, goto end
+	sub r1,1 ; decrementa r1
+	add r4,1 ;incrementa r4
+	add r4,1 ;incrementa r4
+	bnz r7,ifMaior ;goto ifMaior
+end
+	ldi r1,0xf002 ;carrega endereco de imressao
+	ldw r4,maior ;carrega em r4 o conteudo de maior
+	stw r4,r1 ;imprime r4 
+	ldw r4,menor ; carrega em r4 o conteudo de menor
+	stw r4,r1 ;imprime r4
+	hcf ;end of code 
+
+max 30
+vetor 32 22 -45 198 50 26 17 18 90 32 2 17 9 100 99 0 64 76 47 54 57 61 23 78 66 37 34 56 86 92 
+menor 0
+maior 0
+
