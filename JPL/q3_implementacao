@@ -1,26 +1,29 @@
 main
+        ldw r4,vetor ;recebe valor vetor na primeira posicao
 	ldw r2,tam ;carrega tamanho do vetor 
-	ldi r1,1 ;inicia a contagem em 1
-	ldi r5,i ;posicao do vetor
+	ldi r1,1 ;inicia a contagem em 1	
+        xor r5,r5,r5 ;int aux = vetor[i]
+        xor r6,r6,r6 ;int j = i
+        
 inicio
-	slt r3,r1,r2 ;enquanto r1 < r2 nao salta (laco for)
-        bez r3,end
-        ldi r4,vetor ;recebe posicao do vetor
-        ldi r5,r4
-         
-	
-     
+	slt r5,r1,r2 ;enquanto r1 < r2 nao salta (laco for)
+        bez r5,end
+        ldw r3,i ;r3 recebe i
+        stw r3,i ;salva i
+        add r4,r4,r3
+        add r4,r4,r3 ;caminha até o indice i
+        stw r4,aux ;aux recebe vetor 
+        stw r3,j ;j recebe i
+        bnz r7,end
+
 end	
-	ldi r1,0xf002 ;carrega endereco de impressao 
-	ldw r4,tam ;carrega em r4 o tam 
-	stw r4,r1 ;imprime  
+	ldi r1,0xf002 ;carrega impressao
+	stw r4,r1 ;imprime r4  
  	hcf  
-	
-int aux = vetor[i] - apagar estas linhas
-int j = i - apagar estas linhas
+
 
 vetor 20 19 18 17 16 15 14 13 12 10 9 8 7 6 5 4 3 2 1 0
 tam 20
 i 0
-
- 
+j 1
+aux 0
